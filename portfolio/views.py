@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def customer_list(request):
-    permission_classes = (IsAuthenticatedOrReadOnly)
+    permission_classes = IsAuthenticatedOrReadOnly
     if request.method == 'GET':
         customers = Customer.objects.all()
         serializer = CustomerSerializer(customers, context={'request': request}, many=True)
@@ -23,7 +23,6 @@ def customer_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def getCustomer(request, pk):
     """
@@ -35,11 +34,11 @@ def getCustomer(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = CustomerSerializer(customer,context={'request': request})
+        serializer = CustomerSerializer(customer, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = CustomerSerializer(customer, data=request.data,context={'request': request})
+        serializer = CustomerSerializer(customer, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -53,7 +52,7 @@ def getCustomer(request, pk):
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def investment_list(request):
-    permission_classes = (IsAuthenticatedOrReadOnly)
+    permission_classes = IsAuthenticatedOrReadOnly
     if request.method == 'GET':
         investment = Investment.objects.all()
         serializer = InvestmentSerializer(investment, context={'request': request}, many=True)
@@ -67,7 +66,6 @@ def investment_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def getInvestment(request, pk):
     """
@@ -79,11 +77,11 @@ def getInvestment(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = InvestmentSerializer(investment,context={'request': request})
+        serializer = InvestmentSerializer(investment, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = InvestmentSerializer(investment, data=request.data,context={'request': request})
+        serializer = InvestmentSerializer(investment, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -97,7 +95,7 @@ def getInvestment(request, pk):
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def stock_list(request):
-    permission_classes = (IsAuthenticatedOrReadOnly)
+    permission_classes = IsAuthenticatedOrReadOnly
     if request.method == 'GET':
         stock = Stock.objects.all()
         serializer = StockSerializer(stock, context={'request': request}, many=True)
@@ -111,7 +109,6 @@ def stock_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def getStock(request, pk):
     """
@@ -123,11 +120,11 @@ def getStock(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = StockSerializer(stock,context={'request': request})
+        serializer = StockSerializer(stock, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = StockSerializer(stock, data=request.data,context={'request': request})
+        serializer = StockSerializer(stock, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
