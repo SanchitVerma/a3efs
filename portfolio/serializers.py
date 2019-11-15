@@ -8,11 +8,21 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ('pk', 'name', 'address', 'cust_number', 'city', 'state', 'zipcode', 'email', 'email', 'cell_phone')
 
 
+class InvestmentGetSerializer(serializers.ModelSerializer):
+    customer_name = serializers.CharField(source='customer.name', read_only=False)
+
+    class Meta:
+        model = Investment
+        fields = ('pk', 'customer_name', 'category', 'description', 'acquired_value', 'acquired_date', 'recent_value',
+                  'recent_date')
+
+
 class InvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investment
         fields = (
-        'pk', 'customer', 'category', 'description', 'acquired_value', 'acquired_date', 'recent_value', 'recent_date')
+            'pk', 'customer', 'category', 'description', 'acquired_value', 'acquired_date', 'recent_value',
+            'recent_date')
 
 
 class StockSerializer(serializers.ModelSerializer):
